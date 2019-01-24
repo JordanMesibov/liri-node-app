@@ -2,12 +2,18 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
-
+// The spotify-this-song command can only capture song titles that are one word in length at the moment, because I am only capturing the process.argv[3] in the query of the .search aspect of the function. I will go back and fix this later, after I get the rest of the necessary functions working.
 if (process.argv[2] === "spotify-this-song") {
   spotify
     .search({ type: 'track', query: process.argv[3], limit: 1 })
     .then(function(response) {
-      console.log(response.tracks.items);
+      let song = response.tracks.items[0]
+      console.log(`=====================================
+Artist: ${song.album.artists[0].name}
+Song Title: ${song.name}
+Preview Link from Spotify: ${song.preview_url}
+Album: ${song.album.name}
+=====================================`);
     })
     .catch(function(err) {
       console.log(err);
