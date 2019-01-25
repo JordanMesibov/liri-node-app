@@ -24,9 +24,45 @@ Album: ${song.album.name}
     });
 }
 
+// movie-this omdb api section
+var axios = require("axios");
+if (process.argv[3] === "movie-this") {
+axios.get("http://www.omdbapi.com/?t=" + process.argv[3] + "&y=&plot=short&apikey=trilogy").then(
+  function(response) {
+    console.log(response);
+//     console.log(`================
+// Movie title: ${response.data.title}
+// The year it came out: ${response.data.year}
+// The movie's rating: ${response.data.imdbRating}
+// Rotten Tomatoes rating: 
+// Country produced in:
+// Language:
+// Plot:
+// Actors:
+      
+//       `);
+  }
+
+);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // bands in town and concert-this
 
-var axios = require("axios");
 var moment = require("moment");
 var bandsILike = require("./bands.js");
 
