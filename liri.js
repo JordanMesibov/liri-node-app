@@ -32,22 +32,19 @@ var bandsILike = require("./bands.js");
 
 if (process.argv[2] === "concert-this") {
   let userInput = process.argv[3];
-  axios.get("https://rest.bandsintown.com/artists/" + userInput + "+/events?app_id=" + process.env.bandsILike_ID)
+  axios.get("https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=" + process.env.bandsILike_ID)
     .then(function (response) {
-        for (i = 0; i < response.data.length; i++) {
-          console.log(`===============
-Venue Name: ${response.data[i].venue}
-Venue Location: ${response.data[i].datetime}
-==================`);
-          let time = response.data[i].datetime;
-          let eventDate = moment(time).format('MMMM DD YYYY');
-          console.log(`===============
-The date of the event is: ${eventDate}
-================`);
+        console.log(JSON.stringify(response.data, null, 2));
     
-      }
-    })
-    .catch(function (err) {
-      console.log("concert-this error", err);
-    });
-}
+    ,
+    console.log(JSON.stringify(response.data[0].venue.name));
+    console.log(JSON.stringify(response.data[0].venue.country));
+    console.log(JSON.stringify(response.data[0].venue.city));
+    console.log(JSON.stringify(response.data[0].datetime));
+  }
+
+// //   })
+//     ).catch(function (err) {
+//       console.log("concert-this error", err);
+//     });
+// // }
